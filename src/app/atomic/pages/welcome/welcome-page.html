@@ -1,0 +1,48 @@
+<app-auth-template>
+  <div class="welcome-container">
+    <header class="welcome-hero">
+      <div class="hero-inner">
+        <h1 class="hero-title">Bienvenido a SurfSpace</h1>
+        <p class="hero-sub">Reserva tu espacio de trabajo ideal</p>
+        <button class="btn-primary">Comenzar ahora</button>
+      </div>
+      <img src="/assets/resto-de-pantalla.svg" alt="hero" class="hero-image" />
+    </header>
+
+    <main class="welcome-main container">
+      <section class="section">
+        <h2>Salas de reuniones</h2>
+
+        <div class="list">
+          <article *ngFor="let room of meetingRooms" class="card">
+            <div class="card-body">
+              <h3>{{ room.title }}</h3>
+              <p class="muted">{{ room.description }}</p>
+              <button class="btn-ghost">Reservar</button>
+            </div>
+            <div class="card-image" [ngStyle]="{'background-image': 'url(' + room.image + ')'}" role="img" aria-label="Imagen de {{room.title}}"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Espacios de trabajo compartido</h2>
+
+        <div class="list">
+          <article *ngFor="let ws of sharedWorkspaces" class="card">
+            <div class="card-body">
+              <h3>{{ ws.title }}</h3>
+              <p class="muted">{{ ws.description }}</p>
+              <button class="btn-ghost">Reservar</button>
+            </div>
+            <div class="card-image" [ngStyle]="{'background-image': 'url(' + ws.image + ')'}" role="img" aria-label="Imagen de {{ws.title}}"></div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="welcome-footer">
+      <p>Para reservar, por favor regístrate o inicia sesión.</p>
+    </footer>
+  </div>
+</app-auth-template>
