@@ -1,0 +1,11 @@
+<div class="mb-4">
+  <app-label>{{ label }}</app-label>
+  <div class="relative">
+    <app-input [type]="type" [placeholder]="placeholder"></app-input>
+
+    <ng-container *ngIf="icon">
+      <app-icon [name]="icon"
+                class="absolute right-3 top-3"></app-icon>
+    </ng-container>
+  </div>
+</div>
