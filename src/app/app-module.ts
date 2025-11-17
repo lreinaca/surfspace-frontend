@@ -7,6 +7,7 @@ import { CoreModule } from './core/core-module';
 import { SharedModule } from './shared/shared-module';
 import { AtomicModule } from './atomic/atomic-module';
 
+
 @NgModule({
   declarations: [
     App

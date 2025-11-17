@@ -1,4 +1,6 @@
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
 import { CommonModule } from '@angular/common';
 import { Button } from './atoms/button/button';
 import { InputComponent } from './atoms/input/input';
@@ -10,6 +12,7 @@ import { AuthTemplate } from './templates/auth-template/auth-template';
 import { DesignShowcase } from './pages/design-showcase/design-showcase';
 
 import { LucideAngularModule } from 'lucide-angular';
+import { Home } from './pages/home/home';
 
 
 @NgModule({
@@ -21,9 +24,11 @@ import { LucideAngularModule } from 'lucide-angular';
     FormField,
     LoginForm,
     AuthTemplate,
-    DesignShowcase
+    DesignShowcase,
+    Home
   ],
   imports: [
+    BrowserModule,
     CommonModule,
     LucideAngularModule
   ],
@@ -35,7 +40,8 @@ import { LucideAngularModule } from 'lucide-angular';
     FormField,
     LoginForm,
     AuthTemplate,
-    DesignShowcase 
+    DesignShowcase,
+    Home
   ]
 })
 export class AtomicModule { }
