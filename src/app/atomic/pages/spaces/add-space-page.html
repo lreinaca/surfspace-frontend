@@ -1,0 +1,50 @@
+<app-auth-template>
+  <div class="add-space-root container">
+    <div class="panel">
+      <h2>Añadir Nuevo Espacio</h2>
+
+      <form (ngSubmit)="onSubmit()" #f="ngForm" class="add-space-form">
+        <label>
+          Nombre del espacio
+          <input name="nombre" [(ngModel)]="formData.nombre" required />
+        </label>
+
+        <label>
+          Tipo de espacio
+          <select name="tipo" [(ngModel)]="formData.tipo">
+            <option value="">Seleccionar tipo</option>
+            <option value="oficina">Oficina</option>
+            <option value="sala-reuniones">Sala de Reuniones</option>
+            <option value="coworking">Coworking</option>
+            <option value="estudio">Estudio</option>
+          </select>
+        </label>
+
+        <label>
+          Capacidad
+          <input name="capacidad" type="number" min="1" [(ngModel)]="formData.capacidad" />
+        </label>
+
+        <label>
+          Descripción
+          <textarea name="descripcion" [(ngModel)]="formData.descripcion"></textarea>
+        </label>
+
+        <label>
+          Estado
+          <select name="estado" [(ngModel)]="formData.estado">
+            <option value="">Seleccionar disponibilidad</option>
+            <option value="disponible">Disponible</option>
+            <option value="ocupado">Ocupado</option>
+            <option value="mantenimiento">Mantenimiento</option>
+          </select>
+        </label>
+
+        <div class="actions">
+          <button class="btn-primary" type="submit" [disabled]="!f.form.valid">Guardar</button>
+          <button class="btn-link" type="button" (click)="onCancel()">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</app-auth-template>

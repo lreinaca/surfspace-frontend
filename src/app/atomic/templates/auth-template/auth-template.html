@@ -1,1 +1,25 @@
-<p>auth-template works!</p>
+<div class="bg-white w-full min-h-screen flex items-center justify-center">
+	<div class="flex w-full max-w-[1280px] min-h-[60vh] md:min-h-[600px] relative flex-col items-start bg-white shadow-sm">
+		<header class="relative self-stretch w-full h-[65px] border-b border-[#e5e8ea]">
+			<nav class="mx-auto container flex items-center justify-end gap-4 h-full px-4" aria-label="Main navigation">
+				<ul class="inline-flex h-10 items-center gap-4 list-none m-0 p-0">
+					<li></li>
+				</ul>
+
+				<div class="inline-flex items-center gap-2">
+					<button class="inline-flex min-w-[84px] h-10 items-center justify-center px-4 bg-[#0093b2] rounded-lg text-white font-bold">Reservar un Espacio</button>
+					<button class="inline-flex min-w-[84px] h-10 items-center justify-center px-4 bg-[#eff4f4] rounded-lg text-[#0f1616] font-bold">Registrarse</button>
+				</div>
+			</nav>
+
+			<div class="absolute top-3 left-4 flex items-center gap-3">
+				<img class="w-20 h-12 object-contain" alt="Logo" src="/assets/logo.svg" />
+				<h1 class="font-bold text-[#0f1616] text-2xl">SurfSpace</h1>
+			</div>
+		</header>
+
+		<main class="relative flex-1 self-stretch w-full grow">
+			<ng-content></ng-content>
+		</main>
+	</div>
+</div>

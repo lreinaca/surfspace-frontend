@@ -1,0 +1,15 @@
+.catalog-root { padding:1.5rem; }
+.catalog-header h1 { font-size:1.75rem; margin:0 0 1rem 0; }
+.search-row { margin-bottom:1rem; }
+.search-input { width:100%; max-width:520px; padding:0.6rem 0.75rem; border-radius:8px; border:1px solid #e6eef0; }
+.catalog-main { display:flex; flex-direction:column; gap:1.25rem; max-width:960px; }
+.grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap:1rem; }
+.card { background:#f7f9fc; border-radius:8px; overflow:hidden; display:flex; flex-direction:column; }
+.card-image { height:140px; background-size:cover; background-position:center; }
+.card-body { padding:0.75rem; }
+.muted { color:#4491a0; }
+.btn-ghost { background:#e5f2f4; border-radius:6px; padding:0.4rem 0.8rem; border:none; }
+
+@media (max-width:600px){
+  .catalog-root { padding:1rem; }
+}

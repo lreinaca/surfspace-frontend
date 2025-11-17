@@ -1,0 +1,41 @@
+<app-auth-template>
+  <div class="catalog-root container">
+    <header class="catalog-header">
+      <h1>Catálogo de Espacios</h1>
+    </header>
+
+    <section class="search-row">
+      <input class="search-input" placeholder="Buscar espacios" />
+    </section>
+
+    <main class="catalog-main">
+      <section>
+        <h2>Salas de reuniones</h2>
+        <div class="grid">
+          <article *ngFor="let room of meetingRooms" class="card">
+            <div class="card-image" [ngStyle]="{'background-image': 'url(' + room.image + ')'}"></div>
+            <div class="card-body">
+              <h3>{{ room.title }}</h3>
+              <p class="muted">{{ room.description }}</p>
+              <button class="btn-ghost">Reservar</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>Espacios de trabajo compartido</h2>
+        <div class="grid">
+          <article *ngFor="let ws of sharedWorkspaces" class="card">
+            <div class="card-image" [ngStyle]="{'background-image': 'url(' + ws.image + ')'}"></div>
+            <div class="card-body">
+              <h3>{{ ws.title }}</h3>
+              <p class="muted">{{ ws.description }}</p>
+              <button class="btn-ghost">Reservar</button>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+</app-auth-template>

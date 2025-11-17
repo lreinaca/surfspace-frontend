@@ -7,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrl: './login-form.scss'
 })
 export class LoginForm {
+  email: string = '';
+  password: string = '';
+
+  onSubmit(e: Event) {
+    e.preventDefault();
+    // Aquí podrías llamar a un servicio de autenticación
+    console.log('Login submit', { email: this.email, password: this.password });
+  }
 
 }

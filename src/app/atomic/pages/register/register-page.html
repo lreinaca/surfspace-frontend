@@ -1,0 +1,33 @@
+<app-auth-template>
+  <div class="register-root">
+    <div class="register-panel">
+      <h2>Crear cuenta</h2>
+      <form (ngSubmit)="onSubmit()" #f="ngForm" class="register-form">
+        <label>
+          Nombre
+          <input name="nombre" [(ngModel)]="formData.nombre" required />
+        </label>
+
+        <label>
+          Teléfono
+          <input name="telefono" [(ngModel)]="formData.telefono" />
+        </label>
+
+        <label>
+          Email
+          <input name="email" type="email" [(ngModel)]="formData.email" required />
+        </label>
+
+        <label>
+          Contraseña
+          <input name="password" type="password" [(ngModel)]="formData.password" required />
+        </label>
+
+        <div class="actions">
+          <button type="submit" class="btn-primary" [disabled]="!f.form.valid">Crear cuenta</button>
+          <button type="button" class="btn-link" (click)="router.navigate(['/login'])">Ir a login</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</app-auth-template>

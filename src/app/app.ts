@@ -2,7 +2,7 @@ import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.html',
+  templateUrl: './app-clean.html',
   standalone: false,
   styleUrl: './app.scss'
 })

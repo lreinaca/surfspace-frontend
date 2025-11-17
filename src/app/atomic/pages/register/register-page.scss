@@ -1,0 +1,13 @@
+.register-root { display:flex; justify-content:center; padding:2rem 1rem; }
+.register-panel { width:100%; max-width:520px; background:#fff; border-radius:8px; padding:2rem; box-shadow:0 8px 24px rgba(0,0,0,0.06); }
+.register-panel h2 { margin:0 0 1rem 0; font-size:1.5rem; }
+.register-form { display:flex; flex-direction:column; gap:0.75rem; }
+.register-form label { display:flex; flex-direction:column; font-size:0.9rem; color:#0c191c; }
+.register-form input { padding:0.6rem 0.75rem; border-radius:6px; border:1px solid #e6eef0; }
+.actions { display:flex; gap:0.75rem; margin-top:1rem; }
+.btn-primary { background:#0093b2; color:#fff; border-radius:8px; padding:0.6rem 1rem; border:none; }
+.btn-link { background:transparent; border:none; color:#0093b2; cursor:pointer; }
+
+@media (max-width:600px){
+  .register-panel { padding:1rem; }
+}
