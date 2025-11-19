@@ -1,0 +1,220 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Palette y tokens */
+$page-bg: #ffffff;
+$sidebar-bg: #f3f7f8; /* ajustado para coincidir con el mockup */
+$text-main: #0f1720; /* color de texto principal (negro levemente atenuado) */
+$muted: #6b7b84;
+$border: #e6eef0;
+$accent-blue: #1f7ea8; /* link azul */
+$tag-bg: #eef7f9;
+$tag-confirm-bg: #e6f3ea;
+$tag-confirm-text: #22784a;
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+
+.page {
+  display: flex;
+  min-height: 100vh;
+  background: $page-bg;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 300px; /* ancho similar al mockup */
+  background: #F7FAFC;
+  padding: 40px 28px;
+
+  .profile {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 44px;
+
+    img {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 1px 0 rgba(0,0,0,0.02);
+    }
+
+    .name {
+      font-size: 18px;
+      font-weight: 600;
+      color: $text-main;
+      display: block;
+    }
+  }
+
+  nav {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    .item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      color: $text-main;
+      font-size: 16px;
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+
+      .icon {
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+        background: transparent; /* aquí pegas tus SVG como background-image o reemplazas con <svg> */
+      }
+
+      &.active {
+        background: #E5F2F5;
+      }
+
+      &:hover {
+        background: rgba(0,0,0,0.02);
+      }
+    }
+  }
+}
+
+/* CONTENT */
+.content {
+  flex: 1;
+  padding: 56px 72px;
+
+  .title {
+    font-size: 34px; /* tamaño grande como en mockup */
+    font-weight: 700;
+    color: $text-main;
+    margin-bottom: 6px;
+  }
+
+  .subtitle {
+    font-size: 15px;
+    color: $muted;
+    margin-bottom: 28px;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 22px;
+
+    .tab {
+      background: none;
+      border: none;
+      padding: 8px 4px;
+      font-size: 16px;
+      font-weight: 600;
+      color: #4591A1;
+      cursor: pointer;
+      position: relative;
+      outline: none;
+
+      &.active {
+        color: $text-main;
+        &::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          bottom: -10px;
+          height: 3px;
+          width: 100%;
+          background: $text-main;
+          border-radius: 2px;
+        }
+      }
+    }
+  }
+}
+
+/* TABLE */
+.table-container {
+  margin-top: 6px;
+  border: 1px solid $border;
+  border-radius: 12px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 1px 0 rgba(15,23,32,0.03);
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+
+    thead {
+      background: #f6fbfc;
+      th {
+        text-align: left;
+        padding: 18px 28px;
+        font-weight: 600;
+        font-size: 14px;
+        color: $muted;
+        vertical-align: middle;
+      }
+    }
+
+    tbody {
+      tr {
+        border-top: 1px solid $border;
+        transition: background 120ms ease;
+
+        &:hover {
+          background: #fbfeff;
+        }
+
+        td {
+          padding: 18px 28px;
+          vertical-align: middle;
+          color: $text-main;
+        }
+
+        .recurso {
+          font-size: 15px;
+          font-weight: 500;
+          line-height: 1.2;
+        }
+
+        .link {
+          color: $accent-blue;
+          font-weight: 500;
+          cursor: pointer;
+        }
+
+        .hora {
+          color: $muted;
+        }
+
+        .estado {
+          display: inline-block;
+          padding: 8px 14px;
+          border-radius: 10px;
+          font-size: 14px;
+          background: $tag-bg;
+          color: $muted;
+          font-weight: 600;
+        }
+
+        .estado.confirmado {
+          background: $tag-confirm-bg;
+          color: $tag-confirm-text;
+        }
+
+        .detalles {
+          color: $accent-blue;
+          font-weight: 600;
+          cursor: pointer;
+          text-align: right;
+        }
+      }
+    }
+  }
+}
+
+/* Accessibility small tweaks */
+.icon[aria-hidden="true"] { pointer-events: none; }

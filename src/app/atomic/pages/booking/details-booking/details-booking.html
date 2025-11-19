@@ -1,0 +1,105 @@
+<div class="reservation-details-container">
+  <!-- HEADER -->
+  <header class="header">
+    <!-- Logo y nombre de la marca -->
+    <div class="logo-section">
+      <img src="https://res.cloudinary.com/djn8thk2s/image/upload/v1763361948/Logo-SurfingSpace-coworking_1_n4jb0d_c_crop_w_300_h_300_n26546.png" 
+           alt="SurfSpace Logo" 
+           class="logo">
+      <span class="brand-name">SurfSpace</span>
+    </div>
+    
+    <!-- Navegación y acciones del usuario -->
+    <div class="header-actions">
+      <span class="nav-link">Inicio</span>
+      <span class="nav-link">Espacios</span>
+      
+      <!-- Botón de notificaciones -->
+      <button class="icon-button" aria-label="Notificaciones">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+        </svg>
+      </button>
+      
+      <!-- Avatar del usuario -->
+      <div class="avatar">
+        <img src="https://res.cloudinary.com/djn8thk2s/image/upload/v1748134747/e46ee9dd-8a52-4f83-92a1-566dbd6ce14c_fpyk9t.jpg" 
+             alt="User Avatar">
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="main-content">
+    <!-- Título de la página -->
+    <h1 class="page-title">Detalles de la reserva</h1>
+
+    <!-- Sección de resumen -->
+    <section class="summary-section">
+      <h2 class="section-title">Resumen</h2>
+
+      <!-- Grid de información de la reserva -->
+      <div class="details-grid">
+        <!-- Fila 1: Fecha, Hora, Cantidad de invitados -->
+        <div class="detail-item">
+          <div class="detail-label">Fecha</div>
+          <div class="detail-value">{{ reservation.date }}</div>
+        </div>
+
+        <div class="detail-item">
+          <div class="detail-label">Hora</div>
+          <div class="detail-value">{{ reservation.time }}</div>
+        </div>
+
+        <div class="detail-item">
+          <div class="detail-label">Cant. invitados</div>
+          <div class="detail-value">{{ reservation.guestsCount }} invitados</div>
+        </div>
+
+        <!-- Separador visual (línea horizontal) -->
+        <div class="separator"></div>
+
+        <!-- Fila 2: Recurso, Lugar, Duración -->
+        <div class="detail-item">
+          <div class="detail-label">Recurso</div>
+          <div class="detail-value">{{ reservation.resource }}</div>
+        </div>
+
+        <div class="detail-item">
+          <div class="detail-label">Lugar</div>
+          <div class="detail-value">{{ reservation.location }}</div>
+        </div>
+
+        <div class="detail-item">
+          <div class="detail-label">Duración</div>
+          <div class="detail-value">{{ reservation.duration }}</div>
+        </div>
+
+        <!-- Separador visual (línea horizontal) -->
+        <div class="separator"></div>
+
+        <!-- Fila 3: Precio, Estado, Botón de acción -->
+        <div class="detail-item">
+          <div class="detail-label">Precio</div>
+          <div class="detail-value">{{ formatPrice(reservation.price) }}</div>
+        </div>
+
+        <div class="detail-item">
+          <div class="detail-label">Estado</div>
+          <div class="detail-value">{{ reservation.status }}</div>
+          
+          <!-- Botón para confirmar y pagar -->
+          <button class="btn-confirm-pay" (click)="confirmAndPay()">
+            Confirmar y pagar
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Botón para volver -->
+    <div class="button-container">
+      <button class="btn-back" (click)="goBack()">Volver</button>
+    </div>
+  </main>
+</div>

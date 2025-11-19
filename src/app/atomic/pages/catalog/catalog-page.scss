@@ -1,15 +1,161 @@
-.catalog-root { padding:1.5rem; }
-.catalog-header h1 { font-size:1.75rem; margin:0 0 1rem 0; }
-.search-row { margin-bottom:1rem; }
-.search-input { width:100%; max-width:520px; padding:0.6rem 0.75rem; border-radius:8px; border:1px solid #e6eef0; }
-.catalog-main { display:flex; flex-direction:column; gap:1.25rem; max-width:960px; }
-.grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap:1rem; }
-.card { background:#f7f9fc; border-radius:8px; overflow:hidden; display:flex; flex-direction:column; }
-.card-image { height:140px; background-size:cover; background-position:center; }
-.card-body { padding:0.75rem; }
-.muted { color:#4491a0; }
-.btn-ghost { background:#e5f2f4; border-radius:6px; padding:0.4rem 0.8rem; border:none; }
+/* --- LAYOUT GENERAL --- */
+.catalog-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  font-family: "Inter", sans-serif;
+  color: #1a1a1a;
+}
 
-@media (max-width:600px){
-  .catalog-root { padding:1rem; }
+/* --- TOP HEADER --- */
+.top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.logo-area img {
+  height: 40px;
+  border-radius: 8px;
+}
+
+.logo-area span {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.profile-area {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.search-btn {
+  padding: 0.4rem 1.2rem;
+  border-radius: 20px;
+  border: 1px solid #cfe8ed;
+  background: #f5fbfc;
+  cursor: pointer;
+}
+
+.profile-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+/* --- TITLE --- */
+.catalog-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.desc {
+  color: #7a8d92;
+  margin-top: 0.3rem;
+  margin-bottom: 1.5rem;
+}
+
+/* --- SEARCH BAR --- */
+.search-row {
+  margin-bottom: 1rem;
+}
+
+.search-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.6;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.7rem 1rem 0.7rem 2.3rem;
+  border-radius: 12px;
+  border: 1px solid #dce7ea;
+  background: #f7fbfc;
+}
+
+/* --- FILTER TABS --- */
+.tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.tab {
+  background: #e8f4f6;
+  padding: 0.6rem 1.2rem;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.tab.active {
+  background: #cfe9ee;
+  border: 1px solid #9cd3dc;
+}
+
+/* --- LISTA DE TARJETAS --- */
+.item-card {
+  display: flex;
+  gap: 1.2rem;
+  background: #f7fafa;
+  border: 1px solid #dfe9eb;
+  border-radius: 14px;
+  padding: 1rem;
+  margin-bottom: 1.3rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+
+.item-img {
+  width: 280px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.item-content {
+  flex: 1;
+}
+
+.item-content h3 {
+  margin: 0 0 0.4rem 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.item-content p {
+  color: #637a81;
+  margin-bottom: 1rem;
+}
+
+.reserve-btn {
+  padding: 0.5rem 1rem;
+  background: #00aac1;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.bottom-footer {
+  text-align: center;
+  margin-top: 2.5rem;
+  color: #6ea2ab;
 }

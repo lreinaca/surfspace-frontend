@@ -1,41 +1,70 @@
-<app-auth-template>
-  <div class="catalog-root container">
-    <header class="catalog-header">
-      <h1>Catálogo de Espacios</h1>
-    </header>
+<div class="catalog-page">
 
-    <section class="search-row">
+  <!-- HEADER -->
+  <header class="top-header">
+    <div class="logo-area">
+      <img src="https://res.cloudinary.com/djn8thk2s/image/upload/v1763361948/Logo-SurfingSpace-coworking_1_n4jb0d_c_crop_w_300_h_300_n26546.png" alt="logo"/>
+      <span>SurfSpace</span>
+    </div>
+
+    <div class="profile-area">
+      <button class="search-btn">🔍 Search</button>
+      <img src="https://res.cloudinary.com/djn8thk2s/image/upload/v1748134747/e46ee9dd-8a52-4f83-92a1-566dbd6ce14c_fpyk9t.jpg" class="profile-img"/>
+    </div>
+  </header>
+
+  <!-- TITLE -->
+  <section class="catalog-header">
+    <h1>Catálogo de Espacios</h1>
+    <p class="desc">Explora nuestros espacios de trabajo y salas de reuniones</p>
+  </section>
+
+  <!-- SEARCH BAR -->
+  <section class="search-row">
+    <div class="search-wrapper">
+      <span class="search-icon">🔍</span>
       <input class="search-input" placeholder="Buscar espacios" />
+    </div>
+  </section>
+
+  <!-- FILTER TABS -->
+  <nav class="tabs">
+    <button class="tab active">Todos</button>
+    <button class="tab">Espacios compartidos</button>
+    <button class="tab">Salas de reuniones</button>
+  </nav>
+
+  <!-- MAIN LIST -->
+  <main class="catalog-list">
+
+    <!-- SALAS DE REUNIONES -->
+    <section>
+      <div *ngFor="let room of meetingRooms" class="item-card">
+        <img [src]="room.image" class="item-img"/>
+
+        <div class="item-content">
+          <h3>{{ room.title }}</h3>
+          <p>{{ room.description }}</p>
+          <button class="reserve-btn" routerLink="/newReservation">
+            Reservar
+          </button>
+        </div>
+      </div>
     </section>
 
-    <main class="catalog-main">
-      <section>
-        <h2>Salas de reuniones</h2>
-        <div class="grid">
-          <article *ngFor="let room of meetingRooms" class="card">
-            <div class="card-image" [ngStyle]="{'background-image': 'url(' + room.image + ')'}"></div>
-            <div class="card-body">
-              <h3>{{ room.title }}</h3>
-              <p class="muted">{{ room.description }}</p>
-              <button class="btn-ghost">Reservar</button>
-            </div>
-          </article>
-        </div>
-      </section>
+    <!-- ESPACIOS COMPARTIDOS -->
+    <section>
+      <div *ngFor="let ws of sharedWorkspaces" class="item-card">
+        <img [src]="ws.image" class="item-img"/>
 
-      <section>
-        <h2>Espacios de trabajo compartido</h2>
-        <div class="grid">
-          <article *ngFor="let ws of sharedWorkspaces" class="card">
-            <div class="card-image" [ngStyle]="{'background-image': 'url(' + ws.image + ')'}"></div>
-            <div class="card-body">
-              <h3>{{ ws.title }}</h3>
-              <p class="muted">{{ ws.description }}</p>
-              <button class="btn-ghost">Reservar</button>
-            </div>
-          </article>
+        <div class="item-content">
+          <h3>{{ ws.title }}</h3>
+          <p>{{ ws.description }}</p>
+          <button class="reserve-btn">Reservar</button>
         </div>
-      </section>
-    </main>
-  </div>
-</app-auth-template>
+      </div>
+    </section>
+
+  </main>
+
+</div>

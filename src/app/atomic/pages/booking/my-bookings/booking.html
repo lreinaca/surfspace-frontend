@@ -1,0 +1,65 @@
+<div class="page">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="profile">
+      <img src="https://res.cloudinary.com/djn8thk2s/image/upload/v1748134747/e46ee9dd-8a52-4f83-92a1-566dbd6ce14c_fpyk9t.jpg" alt="Foto" />
+      <span class="name">Hola, {{ name }}</span>
+    </div>
+
+    <nav>
+      <a class="item">
+        <span class="icon icon-catalog" aria-hidden="true"></span>
+        <span class="label" routerLink="/catalog">Catálogo</span>
+      </a>
+
+      <a class="item active">
+        <span class="icon icon-reservas" aria-hidden="true"></span>
+        <span class="label">Reservas</span>
+      </a>
+
+      <a class="item">
+        <span class="icon icon-profile" aria-hidden="true"></span>
+        <span class="label" routerLink="/profile">Perfil</span>
+      </a>
+    </nav>
+  </aside>
+
+  <!-- Content -->
+  <main class="content">
+    <h1 class="title">Mis Reservas</h1>
+    <p class="subtitle">Gestiona tus reservas actuales y futuras</p>
+
+    <div class="tabs" role="tablist" aria-label="Filtrar reservas">
+      <button class="tab active" role="tab" aria-selected="true">Próximas</button>
+      <button class="tab" role="tab" aria-selected="false">Pasadas</button>
+    </div>
+
+    <div class="table-container" role="region" aria-label="Lista de reservas">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Recurso</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Hora</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let r of reservas">
+            <td class="recurso">{{ r.recurso }}</td>
+            <td class="link">{{ r.fecha }}</td>
+            <td class="hora">{{ r.hora }}</td>
+            <td>
+              <span class="estado" [class.confirmado]="r.estado === 'Confirmado'">
+                {{ r.estado }}
+              </span>
+            </td>
+            <td class="detalles" (click)="goDetailsBooking()">Ver detalles</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>

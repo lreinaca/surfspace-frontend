@@ -1,0 +1,81 @@
+<div class="page">
+
+    <div class="navbar__left">
+        <img class="navbar__logo"
+            src="https://res.cloudinary.com/djn8thk2s/image/upload/v1763361948/Logo-SurfingSpace-coworking_1_n4jb0d_c_crop_w_300_h_300_n26546.png"
+            alt="SurfSpace Logo" />
+        <span class="navbar__title">SurfSpace</span>
+    </div>
+
+    <div class="header">
+        <div class="header-left">
+            <h1 class="title">Gestionar Espacios</h1>
+        </div>
+
+        <button class="add-btn">
+            Añadir Nuevo Espacio
+        </button>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="search-box">
+        <lucide-icon name="search" class="search-icon"></lucide-icon>
+        <input type="text" placeholder="Buscar recursos" [(ngModel)]="search" (input)="filterSpaces()" />
+    </div>
+
+    <!-- Filters -->
+    <div class="filters">
+        <button class="filter-btn" (click)="toggleFilter('tipo')">
+            Tipo
+            <lucide-icon name="chevron-down"></lucide-icon>
+        </button>
+
+        <button class="filter-btn" (click)="toggleFilter('capacidad')">
+            Capacidad
+            <lucide-icon name="chevron-down"></lucide-icon>
+        </button>
+
+        <button class="filter-btn" (click)="toggleFilter('disponibilidad')">
+            Disponibilidad
+            <lucide-icon name="chevron-down"></lucide-icon>
+        </button>
+    </div>
+
+    <!-- Table -->
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Tipo</th>
+                    <th>Capacidad</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let item of filteredSpaces">
+                    <td>{{ item.nombre }}</td>
+                    <td class="type-link">{{ item.tipo }}</td>
+                    <td>{{ item.capacidad }}</td>
+
+                    <td>
+                        <span class="badge" [ngClass]="{
+                disponible: item.estado === 'Disponible',
+                ocupado: item.estado === 'Ocupado'
+              }">
+                            {{ item.estado }}
+                        </span>
+                    </td>
+
+                    <td>
+                        <button class="action edit" (click)="edit(item)">Editar</button>
+                        |
+                        <button class="action delete" (click)="delete(item)">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

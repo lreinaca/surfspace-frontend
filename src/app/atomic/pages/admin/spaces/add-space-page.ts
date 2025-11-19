@@ -2,12 +2,11 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AtomicModule } from '../../atomic-module';
+import { AtomicModule } from '../../../atomic-module';
 
 @Component({
   selector: 'app-add-space-page',
-  standalone: true,
-  imports: [CommonModule, FormsModule, AtomicModule],
+  standalone: false,
   templateUrl: './add-space-page.html',
   styleUrls: ['./add-space-page.scss']
 })

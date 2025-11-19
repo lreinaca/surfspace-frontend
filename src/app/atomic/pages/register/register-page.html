@@ -1,33 +1,64 @@
-<app-auth-template>
-  <div class="register-root">
-    <div class="register-panel">
-      <h2>Crear cuenta</h2>
-      <form (ngSubmit)="onSubmit()" #f="ngForm" class="register-form">
-        <label>
-          Nombre
-          <input name="nombre" [(ngModel)]="formData.nombre" required />
-        </label>
-
-        <label>
-          Teléfono
-          <input name="telefono" [(ngModel)]="formData.telefono" />
-        </label>
-
-        <label>
-          Email
-          <input name="email" type="email" [(ngModel)]="formData.email" required />
-        </label>
-
-        <label>
-          Contraseña
-          <input name="password" type="password" [(ngModel)]="formData.password" required />
-        </label>
-
-        <div class="actions">
-          <button type="submit" class="btn-primary" [disabled]="!f.form.valid">Crear cuenta</button>
-          <button type="button" class="btn-link" (click)="router.navigate(['/login'])">Ir a login</button>
-        </div>
-      </form>
-    </div>
+<div class="navbar">
+  
+  <div class="navbar__left">
+    <img
+      class="navbar__logo"
+      src="https://res.cloudinary.com/djn8thk2s/image/upload/v1763361948/Logo-SurfingSpace-coworking_1_n4jb0d_c_crop_w_300_h_300_n26546.png"
+      alt="SurfSpace Logo"
+    />
+    <span class="navbar__title">SurfSpace</span>
   </div>
-</app-auth-template>
+
+  <div class="navbar__right">
+    <a class="navbar__link" routerLink="/welcome">Inicio</a>
+
+    <button class="navbar__btn secondary" routerLink="/login">
+      Iniciar sesión
+    </button>
+  </div>
+</div>
+
+<!-- Login Form -------------------------------------------------------------------------->
+
+<div class="container">
+  <h1 class="title">Bienvenido</h1>
+
+  <form (ngSubmit)="createUser()" [formGroup]="form" class="form">
+    <input
+      class="input"
+      type="text"
+      formControlName="name"
+      placeholder="Nombre"
+    />
+
+    <input
+      class="input"
+      type="number"
+      formControlName="phone"
+      placeholder="Teléfono"
+    />
+
+    <input
+      class="input"
+      type="email"
+      formControlName="email"
+      placeholder="Correo electrónico"
+    />
+
+    <input
+      class="input"
+      type="password"
+      formControlName="password"
+      placeholder="Contraseña"
+    />
+
+    <button type="submit" class="submit-btn" routerLink="/catalog">
+      Registrarse
+    </button>
+  </form>
+
+  <p class="login">
+    ¿Ya tienes una cuenta?
+    <a routerLink="/login">Inicia sesión</a>
+  </p>
+</div>
