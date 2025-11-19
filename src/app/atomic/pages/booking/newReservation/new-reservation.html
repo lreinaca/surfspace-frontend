@@ -1,0 +1,121 @@
+<div class="new-reservation-container">
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo-section">
+      <img src="https://res.cloudinary.com/djn8thk2s/image/upload/v1763361948/Logo-SurfingSpace-coworking_1_n4jb0d_c_crop_w_300_h_300_n26546.png" 
+           alt="SurfSpace Logo" 
+           class="logo">
+      <span class="brand-name">SurfSpace</span>
+    </div>
+    <div class="header-actions">
+      <span class="nav-link">Inicio</span>
+      <button class="icon-button" aria-label="Notificaciones">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+        </svg>
+      </button>
+      <div class="avatar">
+        <img src="https://res.cloudinary.com/djn8thk2s/image/upload/v1748134747/e46ee9dd-8a52-4f83-92a1-566dbd6ce14c_fpyk9t.jpg" alt="User Avatar">
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+    <h1 class="page-title">Nueva Reserva</h1>
+
+    <form class="reservation-form">
+      <!-- INFO ROW -->
+      <div class="info-row">
+        <div class="info-item">
+          <div class="info-label">Nombre</div>
+          <div class="info-value">*Nombre del espacio seleccionado</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Tipo de espacio</div>
+          <div class="info-value">*tipo X</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Capacidad</div>
+          <div class="info-value">*X personas</div>
+        </div>
+      </div>
+<!--  ---------------------------------------------------------------------------------  -->
+      <!-- FECHA -->
+      <div class="form-group">
+        <label type="date" for="date" class="form-label">Fecha</label>
+        <div class="input-with-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="input-icon">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+          <input 
+            type="text" 
+            id="date" 
+            class="form-input" 
+            placeholder="Selecciona una fecha"
+            [(ngModel)]="reservation.date"
+            name="date">
+        </div>
+      </div>
+
+      <!-- HORAS -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="startTime" class="form-label">Hora de inicio</label>
+          <div class="input-with-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="input-icon">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+            <input 
+              type="text" 
+              id="startTime" 
+              class="form-input" 
+              placeholder="Selecciona una hora"
+              [(ngModel)]="reservation.startTime"
+              name="startTime">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="endTime" class="form-label">Hora de fin</label>
+          <div class="input-with-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="input-icon">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+            <input 
+              type="text" 
+              id="endTime" 
+              class="form-input" 
+              placeholder="Selecciona una hora"
+              [(ngModel)]="reservation.endTime"
+              name="endTime">
+          </div>
+        </div>
+      </div>
+
+      <!-- NÚMERO DE INVITADOS -->
+      <div class="form-group">
+        <label for="guests" class="form-label">Número de invitados</label>
+        <input 
+          type="text" 
+          id="guests" 
+          class="form-input" 
+          placeholder="Ingresa el número de invitados"
+          [(ngModel)]="reservation.guests"
+          name="guests">
+        <p class="form-hint">Invitados (personas diferentes al titular de la reserva)</p>
+      </div>
+    </form>
+
+    <!-- BOTÓN DE CONFIRMACIÓN -->
+    <div class="button-container">
+      <button class="btn-confirm" (click)="confirmReservation()">Confirmar Reserva</button>
+    </div>
+  </main>
+</div>

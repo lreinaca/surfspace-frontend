@@ -1,30 +1,33 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AtomicModule } from '../../atomic-module';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-register-page',
-  standalone: true,
-  imports: [CommonModule, FormsModule, AtomicModule],
+  selector: 'app-login',
+  standalone: false,
   templateUrl: './register-page.html',
   styleUrls: ['./register-page.scss']
 })
-export class RegisterPage {
-  formData = {
-    nombre: '',
-    telefono: '',
-    email: '',
-    password: ''
-  };
+export class RegisterComponent {
 
-  constructor(public router: Router) {}
+  form: FormGroup;
 
-  onSubmit(): void {
-    // Aquí podrías llamar a un servicio para registrar al usuario.
-    console.log('Form submitted:', this.formData);
-    // opcional: navegar a login tras registro
-    // this.router.navigate(['/login']);
+  constructor(private fb: FormBuilder) {
+    this.form = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required]
+    });
+  }
+
+  createUser() {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+
+    const { email, password } = this.form.value;
+
+    console.log('Iniciando sesión con:', email, password);
+
+    // Aquí va lalógica de autenticación
   }
 }

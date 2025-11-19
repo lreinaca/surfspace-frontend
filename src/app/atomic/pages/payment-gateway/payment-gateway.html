@@ -1,0 +1,153 @@
+<div class="payment-gateway-container">
+  <!-- ==================== HEADER ==================== -->
+  <header class="header">
+    <!-- Logo y nombre de la marca -->
+    <div class="logo-section">
+      <img [src]="logoUrl" 
+           alt="SurfSpace Logo" 
+           class="logo">
+      <span class="brand-name">SurfSpace</span>
+    </div>
+    
+    <!-- Navegación y acciones del usuario -->
+    <div class="header-actions">
+      <span class="nav-link">Inicio</span>
+      
+      <!-- Botón de notificaciones -->
+      <button class="icon-button" aria-label="Notificaciones">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+        </svg>
+      </button>
+      
+      <!-- Avatar del usuario -->
+      <div class="avatar">
+        <img [src]="profileUrl" alt="User Avatar">
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== CONTENIDO PRINCIPAL ==================== -->
+  <main class="main-content">
+    <!-- Título de la página -->
+    <h1 class="page-title">Pasarela de pago</h1>
+
+    <!-- ========== RESUMEN DE LA RESERVA ========== -->
+    <section class="summary-section">
+      <h2 class="section-title">Resumen de la reserva</h2>
+
+      <!-- Grid de información (3 columnas) -->
+      <div class="summary-grid">
+        <div class="summary-item">
+          <div class="summary-label">Fecha</div>
+          <div class="summary-value">{{ reservation.date }}</div>
+        </div>
+
+        <div class="summary-item">
+          <div class="summary-label">Hora</div>
+          <div class="summary-value">{{ reservation.time }}</div>
+        </div>
+
+        <div class="summary-item">
+          <div class="summary-label">Cant. invitados</div>
+          <div class="summary-value">{{ reservation.guestsCount }} invitados</div>
+        </div>
+
+        <div class="summary-item">
+          <div class="summary-label">Recurso</div>
+          <div class="summary-value">{{ reservation.resource }}</div>
+        </div>
+
+        <div class="summary-item">
+          <div class="summary-label">Duración</div>
+          <div class="summary-value">{{ reservation.duration }}</div>
+        </div>
+
+        <div class="summary-item">
+          <div class="summary-label">Precio</div>
+          <div class="summary-value">{{ formatPrice(reservation.price) }}</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== INFORMACIÓN DE PAGO ========== -->
+    <section class="payment-section">
+      <h2 class="section-title">Información de pago</h2>
+
+      <form class="payment-form">
+        <!-- Nombre en la tarjeta -->
+        <div class="form-group">
+          <label for="cardholderName" class="form-label">Nombre en la tarjeta</label>
+          <input 
+            type="text" 
+            id="cardholderName" 
+            class="form-input" 
+            placeholder="Nombre"
+            [(ngModel)]="paymentData.cardholderName"
+            name="cardholderName">
+        </div>
+
+        <!-- Número de tarjeta -->
+        <div class="form-group">
+          <label for="cardNumber" class="form-label">Número de tarjeta</label>
+          <input 
+            type="text" 
+            id="cardNumber" 
+            class="form-input" 
+            placeholder="Número"
+            [(ngModel)]="paymentData.cardNumber"
+            name="cardNumber"
+            maxlength="19">
+        </div>
+
+        <!-- Fecha de vencimiento y CVV (en la misma fila) -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="expirationDate" class="form-label">Fecha de vencimiento</label>
+            <input 
+              type="text" 
+              id="expirationDate" 
+              class="form-input" 
+              placeholder="MM/AA"
+              [(ngModel)]="paymentData.expirationDate"
+              name="expirationDate"
+              maxlength="5">
+          </div>
+
+          <div class="form-group">
+            <label for="cvv" class="form-label">CVV</label>
+            <input 
+              type="text" 
+              id="cvv" 
+              class="form-input" 
+              placeholder="CVV"
+              [(ngModel)]="paymentData.cvv"
+              name="cvv"
+              maxlength="4">
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <!-- ========== OTROS MÉTODOS DE PAGO ========== -->
+    <section class="other-methods-section">
+      <h2 class="section-title">Otros métodos de pago</h2>
+
+      <!-- Botón de PSE con icono -->
+      <button class="pse-button" (click)="payWithPSE()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="pse-icon">
+          <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+          <line x1="1" y1="10" x2="23" y2="10"/>
+        </svg>
+        <span>PSE</span>
+      </button>
+    </section>
+
+    <!-- ========== BOTONES DE ACCIÓN ========== -->
+    <div class="actions-container">
+      <button class="btn-cancel" (click)="cancelPayment()">Cancelar</button>
+      <button class="btn-pay" (click)="processPayment()">Pagar ahora</button>
+    </div>
+  </main>
+</div>
