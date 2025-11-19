@@ -1,0 +1,50 @@
+<app-auth-template>
+  <div class="reservation-root container">
+    <header class="reservation-header">
+      <h1>Nueva Reserva</h1>
+    </header>
+
+    <section class="space-summary">
+      <div class="summary-item">
+        <label>Nombre</label>
+        <div class="value">{{ spaceName }}</div>
+      </div>
+      <div class="summary-item">
+        <label>Tipo de espacio</label>
+        <div class="value">{{ spaceType }}</div>
+      </div>
+      <div class="summary-item">
+        <label>Capacidad</label>
+        <div class="value">{{ capacity }} personas</div>
+      </div>
+    </section>
+
+    <form class="reservation-form" (ngSubmit)="onSubmit()" #f="ngForm">
+      <div class="field">
+        <label>Fecha</label>
+        <input name="date" type="date" [(ngModel)]="reservation.date" required />
+      </div>
+
+      <div class="row two-cols">
+        <div class="field">
+          <label>Hora de inicio</label>
+          <input name="startTime" type="time" [(ngModel)]="reservation.startTime" required />
+        </div>
+        <div class="field">
+          <label>Hora de fin</label>
+          <input name="endTime" type="time" [(ngModel)]="reservation.endTime" required />
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Número de invitados</label>
+        <input name="guests" type="number" min="0" [(ngModel)]="reservation.guests" placeholder="Ingresa el número de invitados" />
+        <div class="hint">Invitados (personas diferentes al titular de la reserva)</div>
+      </div>
+
+      <div class="actions">
+        <button class="btn-primary" type="submit" [disabled]="!f.form.valid">Confirmar Reserva</button>
+      </div>
+    </form>
+  </div>
+</app-auth-template>

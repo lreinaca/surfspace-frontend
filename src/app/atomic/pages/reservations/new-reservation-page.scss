@@ -1,0 +1,20 @@
+.reservation-root { padding:1.5rem; }
+.reservation-header h1 { font-size:1.75rem; margin:0 0 1rem 0; }
+.space-summary { display:flex; gap:2rem; margin-bottom:1.5rem; }
+.summary-item label { font-size:0.85rem; color:#6b7a7b; display:block; }
+.summary-item .value { font-weight:700; color:#0f1616; margin-top:0.25rem; }
+
+.reservation-form { max-width:720px; }
+.field { margin-bottom:1rem; }
+.row.two-cols { display:flex; gap:1rem; }
+.row.two-cols .field { flex:1; }
+.reservation-form input, .reservation-form select, .reservation-form textarea { width:100%; padding:0.6rem 0.75rem; border-radius:6px; border:1px solid #e6eef0; }
+.hint { font-size:0.85rem; color:#9fbfc4; margin-top:0.5rem; }
+.actions { display:flex; justify-content:flex-end; margin-top:2rem; }
+.btn-primary { background:#0093b2; color:#fff; border-radius:8px; padding:0.6rem 1rem; border:none; }
+
+@media (max-width:768px){
+  .space-summary { flex-direction:column; gap:0.75rem; }
+  .row.two-cols { flex-direction:column; }
+  .actions { justify-content:center; }
+}
