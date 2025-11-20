@@ -125,3 +125,36 @@
 .register a:hover {
   text-decoration: underline;
 }
+
+/* ----------- VALIDATION STYLES ----------- */
+
+.input.error {
+  border: 2px solid #ef4444;
+  background-color: #fee;
+}
+
+.error-text {
+  display: block;
+  color: #ef4444;
+  font-size: 13px;
+  margin-top: -15px;
+  text-align: left;
+}
+
+.error-message {
+  background-color: #fee;
+  color: #dc2626;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #fca5a5;
+  font-size: 14px;
+}
+
+.submit-btn:disabled {
+  background-color: #cbd5e1;
+  cursor: not-allowed;
+}
+
+.submit-btn:disabled:hover {
+  background-color: #cbd5e1;
+}

@@ -11,7 +11,7 @@
   </div>
 
   <div class="navbar__right">
-    <a class="navbar__link" routerLink="/inicio">Inicio</a>
+    <a class="navbar__link" routerLink="/welcome">Inicio</a>
 
     <button class="navbar__btn primary">Reservar un Espacio</button>
     <button class="navbar__btn secondary" routerLink="/register">
@@ -28,18 +28,31 @@
       class="input"
       type="email"
       formControlName="email"
-      placeholder="Correo  electrónico"
+      placeholder="Correo electrónico"
+      [class.error]="form.get('email')?.invalid && form.get('email')?.touched"
     />
+    <small *ngIf="form.get('email')?.invalid && form.get('email')?.touched" class="error-text">
+      Ingresa un correo válido
+    </small>
 
     <input
       class="input"
       type="password"
       formControlName="password"
       placeholder="Contraseña"
+      [class.error]="form.get('password')?.invalid && form.get('password')?.touched"
     />
+    <small *ngIf="form.get('password')?.invalid && form.get('password')?.touched" class="error-text">
+      La contraseña debe tener al menos 6 caracteres
+    </small>
 
-    <button type="submit" class="submit-btn" routerLink="/catalog">
-      Iniciar Sesión
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+
+    <button type="submit" class="submit-btn" [disabled]="loading || form.invalid">
+      <span *ngIf="!loading">Iniciar Sesión</span>
+      <span *ngIf="loading">Iniciando sesión...</span>
     </button>
   </form>
 
