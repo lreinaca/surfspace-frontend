@@ -1,81 +1,136 @@
-<div class="page">
+<div class="manage-spaces-container">
+  <!-- ==================== HEADER ==================== -->
+  <header class="header">
+    <!-- Logo y nombre de la marca -->
+    <div class="logo-section">
+      <img [src]="logoUrl" 
+           alt="SurfSpace Logo" 
+           class="logo">
+      <span class="brand-name">SurfSpace</span>
+    </div>
+    
+    <!-- Botón volver y avatar -->
+    <div class="header-actions">
+      <button class="btn-back" (click)="goBack()">
+        <!-- Icono de flecha hacia atrás -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"/>
+          <polyline points="12 19 5 12 12 5"/>
+        </svg>
+        <span>volver al panel</span>
+      </button>
+      
+      <!-- Avatar del usuario -->
+      <div class="avatar">
+        <img [src]="profileUrl" alt="User Avatar">
+      </div>
+    </div>
+  </header>
 
-    <div class="navbar__left">
-        <img class="navbar__logo"
-            src="https://res.cloudinary.com/djn8thk2s/image/upload/v1763361948/Logo-SurfingSpace-coworking_1_n4jb0d_c_crop_w_300_h_300_n26546.png"
-            alt="SurfSpace Logo" />
-        <span class="navbar__title">SurfSpace</span>
+  <!-- ==================== CONTENIDO PRINCIPAL ==================== -->
+  <main class="main-content">
+    
+    <!-- Encabezado con título y botón de añadir -->
+    <div class="content-header">
+      <h1 class="page-title">Gestionar Espacios</h1>
+      <button class="btn-add" (click)="addNewSpace()">Añadir Nuevo Espacio</button>
     </div>
 
-    <div class="header">
-        <div class="header-left">
-            <h1 class="title">Gestionar Espacios</h1>
-        </div>
+    <!-- Barra de búsqueda -->
+    <div class="search-container">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-icon">
+        <circle cx="11" cy="11" r="8"/>
+        <path d="m21 21-4.35-4.35"/>
+      </svg>
+      <input 
+        type="text" 
+        class="search-input" 
+        placeholder="Buscar recursos"
+        [(ngModel)]="searchTerm"
+        (input)="onSearch()"
+        name="search">
+    </div>
 
-        <button class="add-btn">
-            Añadir Nuevo Espacio
+    <!-- Filtros -->
+    <div class="filters-container">
+      <!-- Filtro por Tipo -->
+      <div class="filter-item">
+        <button class="filter-button">
+          <span>Tipo</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
         </button>
-    </div>
+      </div>
 
-    <!-- Search Bar -->
-    <div class="search-box">
-        <lucide-icon name="search" class="search-icon"></lucide-icon>
-        <input type="text" placeholder="Buscar recursos" [(ngModel)]="search" (input)="filterSpaces()" />
-    </div>
-
-    <!-- Filters -->
-    <div class="filters">
-        <button class="filter-btn" (click)="toggleFilter('tipo')">
-            Tipo
-            <lucide-icon name="chevron-down"></lucide-icon>
+      <!-- Filtro por Capacidad -->
+      <div class="filter-item">
+        <button class="filter-button">
+          <span>Capacidad</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
         </button>
+      </div>
 
-        <button class="filter-btn" (click)="toggleFilter('capacidad')">
-            Capacidad
-            <lucide-icon name="chevron-down"></lucide-icon>
+      <!-- Filtro por Disponibilidad -->
+      <div class="filter-item">
+        <button class="filter-button">
+          <span>Disponibilidad</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
         </button>
-
-        <button class="filter-btn" (click)="toggleFilter('disponibilidad')">
-            Disponibilidad
-            <lucide-icon name="chevron-down"></lucide-icon>
-        </button>
+      </div>
     </div>
 
-    <!-- Table -->
-    <div class="table-wrapper">
-        <table>
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Tipo</th>
-                    <th>Capacidad</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
+    <!-- Tabla de espacios -->
+    <div class="table-container">
+      <table class="spaces-table">
+        <!-- Encabezados de la tabla -->
+        <thead>
+          <tr>
+            <th class="th-name">Nombre</th>
+            <th class="th-type">Tipo</th>
+            <th class="th-capacity">Capacidad</th>
+            <th class="th-status">Estado</th>
+            <th class="th-actions">Acciones</th>
+          </tr>
+        </thead>
 
-            <tbody>
-                <tr *ngFor="let item of filteredSpaces">
-                    <td>{{ item.nombre }}</td>
-                    <td class="type-link">{{ item.tipo }}</td>
-                    <td>{{ item.capacidad }}</td>
+        <!-- Filas de datos -->
+        <tbody>
+          <tr *ngFor="let space of filteredSpaces" class="table-row">
+            <!-- Nombre del espacio -->
+            <td class="td-name">{{ space.name }}</td>
 
-                    <td>
-                        <span class="badge" [ngClass]="{
-                disponible: item.estado === 'Disponible',
-                ocupado: item.estado === 'Ocupado'
-              }">
-                            {{ item.estado }}
-                        </span>
-                    </td>
+            <!-- Tipo del espacio -->
+            <td class="td-type">{{ space.type }}</td>
 
-                    <td>
-                        <button class="action edit" (click)="edit(item)">Editar</button>
-                        |
-                        <button class="action delete" (click)="delete(item)">Eliminar</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+            <!-- Capacidad -->
+            <td class="td-capacity">{{ space.capacity }}</td>
+
+            <!-- Estado (cambia color según disponibilidad) -->
+            <td class="td-status">
+              <span [class]="getStatusClass(space.status)" class="status-badge">
+                {{ getStatusText(space.status) }}
+              </span>
+            </td>
+
+            <!-- Acciones (Editar | Eliminar) -->
+            <td class="td-actions">
+              <button class="action-link" (click)="editSpace(space.id)">Editar</button>
+              <span class="action-separator">|</span>
+              <button class="action-link" (click)="deleteSpace(space.id)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Mensaje si no hay resultados -->
+      <div *ngIf="filteredSpaces.length === 0" class="no-results">
+        <p>No se encontraron espacios que coincidan con los filtros</p>
+      </div>
     </div>
+  </main>
 </div>

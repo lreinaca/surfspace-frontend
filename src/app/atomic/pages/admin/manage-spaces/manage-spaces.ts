@@ -1,67 +1,163 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+// Interface para tipar un espacio
+interface Space {
+  id: number;
+  name: string;
+  type: string;
+  capacity: number;
+  status: 'available' | 'occupied'; // Estados posibles
+}
 
 @Component({
   selector: 'app-manage-spaces',
-  standalone: false,
   templateUrl: './manage-spaces.html',
-  styleUrls: ['./manage-spaces.scss']
+  styleUrls: ['./manage-spaces.scss'],
+  standalone: false
 })
-export class ManageSpacesComponent {
-  search: string = '';
+export class ManageSpacesComponent implements OnInit {
+  
+  // URLs de imágenes
+  logoUrl = 'https://res.cloudinary.com/djn8thk2s/image/upload/v1763361948/Logo-SurfingSpace-coworking_1_n4jb0d_c_crop_w_300_h_300_n26546.png';
+  profileUrl = 'https://res.cloudinary.com/djn8thk2s/image/upload/v1748134747/e46ee9dd-8a52-4f83-92a1-566dbd6ce14c_fpyk9t.jpg';
 
-  spaces = [
+  // Término de búsqueda
+  searchTerm = '';
+
+  // Filtros seleccionados
+  selectedType = '';
+  selectedCapacity = '';
+  selectedAvailability = '';
+
+  // Lista completa de espacios (vendría del backend)
+  allSpaces: Space[] = [
     {
-      nombre: 'Sala de Reuniones #1',
-      tipo: 'Sala de Reuniones',
-      capacidad: 10,
-      estado: 'Disponible'
+      id: 1,
+      name: 'Sala de Reuniones #1',
+      type: 'Sala de Reuniones',
+      capacity: 10,
+      status: 'available'
     },
     {
-      nombre: 'Sala de Reuniones #2',
-      tipo: 'Sala de Reuniones',
-      capacidad: 6,
-      estado: 'Ocupado'
+      id: 2,
+      name: 'Sala de Reuniones #2',
+      type: 'Sala de Reuniones',
+      capacity: 6,
+      status: 'occupied'
     },
     {
-      nombre: 'Espacio de trabajo compartido #2',
-      tipo: 'Espacio de trabajo compartido',
-      capacidad: 10,
-      estado: 'Disponible'
+      id: 3,
+      name: 'Espacio de trabajo compartido #2',
+      type: 'Espacio de trabajo compartido',
+      capacity: 10,
+      status: 'available'
     },
     {
-      nombre: 'Espacio de trabajo compartido #3',
-      tipo: 'Sala de Reuniones',
-      capacidad: 30,
-      estado: 'Disponible'
+      id: 4,
+      name: 'Espacio de trabajo compartido #3',
+      type: 'Sala de Reuniones',
+      capacity: 30,
+      status: 'available'
     },
     {
-      nombre: 'Espacio de trabajo compartido #5',
-      tipo: 'Espacio de trabajo compartido',
-      capacidad: 15,
-      estado: 'Disponible'
+      id: 5,
+      name: 'Espacio de trabajo compartido #5',
+      type: 'Espacio de trabajo compartido',
+      capacity: 15,
+      status: 'available'
     }
   ];
 
-  filteredSpaces = [...this.spaces];
+  // Lista filtrada de espacios (se actualiza con búsqueda y filtros)
+  filteredSpaces: Space[] = [];
 
-  filterSpaces() {
-    const text = this.search.toLowerCase();
+  constructor(private router: Router) { }
 
-    this.filteredSpaces = this.spaces.filter(s =>
-      s.nombre.toLowerCase().includes(text) ||
-      s.tipo.toLowerCase().includes(text)
-    );
+  ngOnInit(): void {
+    // Inicializar con todos los espacios
+    this.filteredSpaces = [...this.allSpaces];
   }
 
-  toggleFilter(filter: string) {
-    console.log('Filtro presionado:', filter);
+  /**
+   * Filtra los espacios según el término de búsqueda
+   */
+  onSearch(): void {
+    this.applyFilters();
   }
 
-  edit(item: any) {
-    console.log('Editar', item);
+  /**
+   * Aplica todos los filtros activos (búsqueda, tipo, capacidad, disponibilidad)
+   */
+  applyFilters(): void {
+    this.filteredSpaces = this.allSpaces.filter(space => {
+      // Filtro de búsqueda (por nombre)
+      const matchesSearch = !this.searchTerm || 
+        space.name.toLowerCase().includes(this.searchTerm.toLowerCase());
+
+      // Filtro de tipo
+      const matchesType = !this.selectedType || 
+        space.type === this.selectedType;
+
+      // Filtro de capacidad (esto depende de cómo quieras implementarlo)
+      const matchesCapacity = !this.selectedCapacity || 
+        space.capacity.toString() === this.selectedCapacity;
+
+      // Filtro de disponibilidad
+      const matchesAvailability = !this.selectedAvailability || 
+        space.status === this.selectedAvailability;
+
+      return matchesSearch && matchesType && matchesCapacity && matchesAvailability;
+    });
   }
 
-  delete(item: any) {
-    console.log('Eliminar', item);
+  /**
+   * Navega a la página para añadir un nuevo espacio
+   */
+  addNewSpace(): void {
+    this.router.navigate(['/add-space']);
+  }
+
+  /**
+   * Navega a la página de edición del espacio
+   */
+  editSpace(spaceId: number): void {
+    console.log('Editando espacio:', spaceId);
+    this.router.navigate(['/edit-space', spaceId]);
+  }
+
+  /**
+   * Elimina un espacio (con confirmación)
+   */
+  deleteSpace(spaceId: number): void {
+    const confirmDelete = confirm('¿Estás seguro de que deseas eliminar este espacio?');
+    if (confirmDelete) {
+      console.log('Eliminando espacio:', spaceId);
+      // Aquí iría la llamada al backend para eliminar
+      // Después de eliminar, actualizar la lista
+      this.allSpaces = this.allSpaces.filter(s => s.id !== spaceId);
+      this.applyFilters();
+    }
+  }
+
+  /**
+   * Navega de vuelta al panel/dashboard
+   */
+  goBack(): void {
+    this.router.navigate(['/dashboard']);
+  }
+
+  /**
+   * Obtiene el texto del estado según el valor
+   */
+  getStatusText(status: string): string {
+    return status === 'available' ? 'Disponible' : 'Ocupado';
+  }
+
+  /**
+   * Obtiene la clase CSS según el estado
+   */
+  getStatusClass(status: string): string {
+    return status === 'available' ? 'status-available' : 'status-occupied';
   }
 }

@@ -17,7 +17,7 @@ COPY . .
 
 #Ejecutar el buid de producción de Angular
 #Esto genera la carpeta dist
-RUN npm clean run build -- --configuration production
+RUN npm run build -- --configuration production
 
 #ETAPA 2: Servidor web (Production Stage) -------------------------------------------------
 #Usamos nginx para servir los archivos estáticos

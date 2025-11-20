@@ -1,68 +1,119 @@
-<div class="page">
+<div class="users-container">
+  <!-- ==================== HEADER ==================== -->
+  <header class="header">
+    <!-- Logo y nombre de la marca -->
+    <div class="logo-section">
+      <img [src]="logoUrl" 
+           alt="SurfSpace Logo" 
+           class="logo">
+      <span class="brand-name">SurfSpace</span>
+    </div>
+    
+    <!-- Botón volver y avatar -->
+    <div class="header-actions">
+      <button class="btn-back" (click)="goBack()">
+        <!-- Icono de flecha hacia atrás -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"/>
+          <polyline points="12 19 5 12 12 5"/>
+        </svg>
+        <span>volver al panel</span>
+      </button>
+      
+      <!-- Avatar del usuario -->
+      <div class="avatar">
+        <img [src]="profileUrl" alt="User Avatar">
+      </div>
+    </div>
+  </header>
 
-  <div class="navbar__left">
-    <img class="navbar__logo"
-      src="https://res.cloudinary.com/djn8thk2s/image/upload/v1763361948/Logo-SurfingSpace-coworking_1_n4jb0d_c_crop_w_300_h_300_n26546.png"
-      alt="SurfSpace Logo" />
-    <span class="navbar__title">SurfSpace</span>
-  </div>
+  <!-- ==================== CONTENIDO PRINCIPAL ==================== -->
+  <main class="main-content">
+    
+    <!-- Título de la página -->
+    <h1 class="page-title">Usuarios</h1>
 
-  <h1 class="title">Usuarios</h1>
+    <!-- Barra de búsqueda -->
+    <div class="search-container">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-icon">
+        <circle cx="11" cy="11" r="8"/>
+        <path d="m21 21-4.35-4.35"/>
+      </svg>
+      <input 
+        type="text" 
+        class="search-input" 
+        placeholder="Buscar usuarios por nombre o email"
+        [(ngModel)]="searchTerm"
+        (input)="onSearch()"
+        name="search">
+    </div>
 
-  <!-- Search Box -->
-  <div class="search-box">
-    <lucide-icon name="search" class="search-icon"></lucide-icon>
-    <input type="text" placeholder="Buscar usuarios por nombre o email" [(ngModel)]="search" (input)="filterUsers()" />
-  </div>
+    <!-- Filtros -->
+    <div class="filters-container">
+      <!-- Filtro por Rol -->
+      <div class="filter-item">
+        <button class="filter-button">
+          <span>Rol</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
+      </div>
 
-  <!-- Filters -->
-  <div class="filters">
-    <button class="filter-btn" (click)="toggleFilter('rol')">
-      Rol
-      <lucide-icon name="chevron-down"></lucide-icon>
-    </button>
+      <!-- Filtro por Estado -->
+      <div class="filter-item">
+        <button class="filter-button">
+          <span>Estado</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
+      </div>
+    </div>
 
-    <button class="filter-btn" (click)="toggleFilter('estado')">
-      Estado
-      <lucide-icon name="chevron-down"></lucide-icon>
-    </button>
-  </div>
+    <!-- Tabla de usuarios -->
+    <div class="table-container">
+      <table class="users-table">
+        <!-- Encabezados de la tabla -->
+        <thead>
+          <tr>
+            <th class="th-name">Nombre</th>
+            <th class="th-email">Email</th>
+            <th class="th-role">Rol</th>
+            <th class="th-status">Estado</th>
+          </tr>
+        </thead>
 
-  <!-- Table -->
-  <div class="table-wrapper">
-    <table>
-      <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Email</th>
-          <th>Rol</th>
-          <th>Estado</th>
-        </tr>
-      </thead>
+        <!-- Filas de datos -->
+        <tbody>
+          <tr *ngFor="let user of filteredUsers" class="table-row">
+            <!-- Nombre del usuario -->
+            <td class="td-name">{{ user.name }}</td>
 
-      <tbody>
-        <tr *ngFor="let user of filteredUsers">
+            <!-- Email del usuario -->
+            <td class="td-email">{{ user.email }}</td>
 
-          <td>{{ user.nombre }}</td>
+            <!-- Rol (con badge de fondo gris claro) -->
+            <td class="td-role">
+              <span [class]="getRoleClass(user.role)" class="role-badge">
+                {{ user.role }}
+              </span>
+            </td>
 
-          <td class="email">{{ user.email }}</td>
+            <!-- Estado (texto simple sin badge) -->
+            <td class="td-status">
+              <span [class]="getStatusClass(user.status)" class="status-text">
+                {{ user.status }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
-          <td>
-            <span class="badge rol">{{ user.rol }}</span>
-          </td>
-
-          <td>
-            <span class="badge estado" [ngClass]="{
-                activo: user.estado === 'Activo',
-                inactivo: user.estado === 'Inactivo'
-              }">
-              {{ user.estado }}
-            </span>
-          </td>
-
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
+      <!-- Mensaje si no hay resultados -->
+      <div *ngIf="filteredUsers.length === 0" class="no-results">
+        <p>No se encontraron usuarios que coincidan con los filtros</p>
+      </div>
+    </div>
+  </main>
 </div>
