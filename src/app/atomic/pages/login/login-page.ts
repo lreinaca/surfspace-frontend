@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from '../../../core/api.service';
@@ -18,7 +18,8 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private api: ApiService,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -50,18 +51,34 @@ export class LoginComponent {
         localStorage.setItem('token', response.token);
         localStorage.setItem('user', JSON.stringify(response.user));
         
+        this.loading = false;
+        
         // Navegar al catálogo
         this.router.navigate(['/catalog']).then(() => {
           console.log(`Usuario ${response.user.nombre} ha iniciado sesión`);
         });
       },
-      error: (error) => {
-        console.error('Error en login:', error);
-        this.errorMessage = error.error?.message || 'Credenciales incorrectas. Verifica tu email y contraseña.';
+      error: (httpError) => {
+        console.error('Error completo:', httpError);
+        console.error('Status:', httpError.status);
+        console.error('Error body:', httpError.error);
+        console.error('Error body JSON:', JSON.stringify(httpError.error, null, 2));
+        
         this.loading = false;
-      },
-      complete: () => {
-        this.loading = false;
+        
+        // Manejar diferentes tipos de errores
+        if (httpError.status === 401) {
+          // Intentar obtener el mensaje del backend
+          const backendMessage = httpError.error?.message || httpError.error?.error;
+          this.errorMessage = backendMessage || 'Credenciales incorrectas. Verifica tu email y contraseña.';
+        } else if (httpError.status === 0) {
+          this.errorMessage = 'No se pudo conectar con el servidor. Verifica tu conexión.';
+        } else {
+          this.errorMessage = httpError.error?.message || 'Ocurrió un error inesperado. Por favor intenta de nuevo.';
+        }
+        
+        // Forzar detección de cambios
+        this.cdr.detectChanges();
       }
     });
   }

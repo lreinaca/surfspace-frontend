@@ -15,9 +15,9 @@ RUN npm install
 #Copiar TODO el código fuente al contenedor
 COPY . . 
 
-#Ejecutar el buid de producción de Angular
+#Ejecutar el build de producción de Angular
 #Esto genera la carpeta dist
-RUN npm clean run build -- --configuration production
+RUN npm run build -- --configuration production
 
 #ETAPA 2: Servidor web (Production Stage) -------------------------------------------------
 #Usamos nginx para servir los archivos estáticos
@@ -27,7 +27,7 @@ FROM nginx:alpine
 RUN mkdir -p /var/log/nginx
 
 #copio proyecto listo para el despliegue
-COPY --from=build /app/dist/surfspace-frontend /usr/share/nginx/html
+COPY --from=build /app/dist/surfspace-frontend/browser /usr/share/nginx/html
 
 # (opcional) Copiar configuración personalizada de Nginx
 COPY nginx.conf /etc/nginx/conf.d/default.conf
